@@ -16,4 +16,9 @@ class CongeService
             'statut' => 'en_cours',
         ]);
     }
+
+    public function mesDemandes(User $user)
+    {
+        return $user->conges()->latest()->get();
+    }
 }

@@ -13,7 +13,7 @@ class CongePolicy
      */
     public function viewAny(User $user): bool
     {
-        return false;
+        return $user->role === 'employe';
     }
 
     /**
@@ -37,7 +37,8 @@ class CongePolicy
      */
     public function update(User $user, Conge $conge): bool
     {
-        return false;
+        return $user->role === 'admin'
+        && $conge->statut === 'en_cours';
     }
 
     /**
