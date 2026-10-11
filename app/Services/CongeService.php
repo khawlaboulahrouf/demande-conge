@@ -21,4 +21,11 @@ class CongeService
     {
         return $user->conges()->latest()->get();
     }
+
+    public function changerStatus(Conge $conge, string $statut): Conge
+    {
+        $conge->update(['statut' => $statut]);
+
+        return $conge;
+    }
 }
