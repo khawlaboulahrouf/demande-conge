@@ -12,7 +12,7 @@ class Conge extends Model
         'date_debut',
         'date_fin',
         'motif',
-        'statut',
+        'status',
     ];
 
     public function user(): BelongsTo

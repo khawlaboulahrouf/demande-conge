@@ -3,29 +3,36 @@
 namespace App\Services;
 
 use App\Models\Conge;
-use App\Models\User;
 
-class CongeService 
+class CongeService
 {
-    public function create(User $user, array $data):Conge
+    public function creerDemande($user, $data)
     {
-        return $user->conges()->create([
+        return Conge::create([
+            'user_id' => $user->id,
             'date_debut' => $data['date_debut'],
             'date_fin' => $data['date_fin'],
             'motif' => $data['motif'],
-            'statut' => 'en_cours',
+            'status' => 'en_cours',
         ]);
     }
 
-    public function mesDemandes(User $user)
+    public function mesDemandes($user)
     {
-        return $user->conges()->latest()->get();
+        return $user->conges;
     }
 
-    public function changerStatus(Conge $conge, string $statut): Conge
+    public function toutesDemandes()
     {
-        $conge->update(['statut' => $statut]);
+        return Conge::with('user')->get();
+    }
+
+    public function changerStatut($conge, $status)
+    {
+        $conge->update(['status' => $status]);
 
         return $conge;
     }
+
+
 }
